@@ -5,7 +5,6 @@ using UnityEngine;
 public class KinematicArrive : MonoBehaviour {
 
 	public GameObject character;
-	private Vector3 target;
 	public float maxSpeed;
 	public float satRadius;
 	public float timeToTarget;
@@ -14,9 +13,12 @@ public class KinematicArrive : MonoBehaviour {
 	void Start () {
 		
 	}
+		
 
-	void setTarget(Vector3 m){
-		target = m;
+	public void moveToPoint(Vector3 target){
+
+		character.transform.position = target;
+		print (target);
 	}
 
 	
