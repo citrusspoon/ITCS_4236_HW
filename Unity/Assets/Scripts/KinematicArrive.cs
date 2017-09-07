@@ -17,7 +17,7 @@ public class KinematicArrive : MonoBehaviour {
 
 	public void moveToPoint(Vector3 target){
 
-		character.transform.position = target;
+		character.transform.position = new Vector3(target.x, target.y, -1.0f);
 		print (target);
 	}
 
