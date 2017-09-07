@@ -45,8 +45,15 @@ public class KinematicArrive : MonoBehaviour {
 		if (enRoute) {
 
 			Vector3 direction = target - character.transform.position;
-			//character.transform.rotation = Quaternion.Lerp (character.transform.rotation, Quaternion.LookRotation(direction), 1.0f);
-			character.transform.LookAt(target);
+			float rotateZ = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+			//character.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotateZ);
+			//print (direction);
+			character.transform.rotation = Quaternion.Lerp (character.transform.rotation, Quaternion.Euler(0.0f, 0.0f, rotateZ), Time.deltaTime*5.0f);
+			//character.transform.LookAt(target);
+
+
+
+
 			if (direction.magnitude > maxSpeed) {
 				direction.Normalize ();
 				direction *= maxSpeed;
