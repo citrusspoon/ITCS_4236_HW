@@ -6,24 +6,54 @@ public class KinematicArrive : MonoBehaviour {
 
 	public GameObject character;
 	public float maxSpeed;
+	private Vector3 target;
 	public float satRadius;
 	public float timeToTarget;
+	private bool enRoute;
 
 	// Use this for initialization
 	void Start () {
-		
+		enRoute = false;
 	}
 		
+	/// <summary>
+	/// Teleports to point. Used for testing
+	/// </summary>
+	/// <param name="t">T.</param>
 
-	public void moveToPoint(Vector3 target){
+	public void teleportToPoint(Vector3 t){
 
-		character.transform.position = new Vector3(target.x, target.y, -1.0f);
+		target = new Vector3 (t.x, t.y, -1.0f);
+
+		character.transform.position = target;
 		print (target);
 	}
 
+	/// <summary>
+	/// Moves to point with rotation.
+	/// </summary>
+	/// <param name="t">T.</param>
+	public void moveToPoint(Vector3 t){
+		target = new Vector3 (t.x, t.y, -1.0f);
+		enRoute = true;
+
+	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		if (enRoute) {
+
+			Vector3 direction = target - character.transform.position;
+			//character.transform.rotation = Quaternion.Lerp (character.transform.rotation, Quaternion.LookRotation(direction), 1.0f);
+			character.transform.LookAt(target);
+			if (direction.magnitude > maxSpeed) {
+				direction.Normalize ();
+				direction *= maxSpeed;
+			}
+
+			character.GetComponent<Rigidbody> ().velocity = direction;
+
+		}
 	}
 }
