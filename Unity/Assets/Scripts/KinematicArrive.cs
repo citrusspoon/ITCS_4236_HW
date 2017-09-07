@@ -6,6 +6,7 @@ public class KinematicArrive : MonoBehaviour {
 
 	public GameObject character;
 	public float maxSpeed;
+	public float rotateSpeed;
 	private Vector3 target;
 	public float satRadius;
 	public float timeToTarget;
@@ -46,10 +47,8 @@ public class KinematicArrive : MonoBehaviour {
 
 			Vector3 direction = target - character.transform.position;
 			float rotateZ = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
-			//character.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotateZ);
-			//print (direction);
-			character.transform.rotation = Quaternion.Lerp (character.transform.rotation, Quaternion.Euler(0.0f, 0.0f, rotateZ), Time.deltaTime*5.0f);
-			//character.transform.LookAt(target);
+			character.transform.rotation = Quaternion.Lerp (character.transform.rotation, Quaternion.Euler(0.0f, 0.0f, rotateZ), Time.deltaTime * rotateSpeed);
+
 
 
 
