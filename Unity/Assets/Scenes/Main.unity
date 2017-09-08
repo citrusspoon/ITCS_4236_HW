@@ -636,7 +636,7 @@ MonoBehaviour:
   character: {fileID: 1977871531}
   maxSpeed: 5
   rotateSpeed: 4
-  satRadius: 5
+  satRadius: 0.25
   timeToTarget: 0.5
 --- !u!23 &1977871534
 MeshRenderer:
