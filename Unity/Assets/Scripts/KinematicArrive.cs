@@ -9,6 +9,7 @@ public class KinematicArrive : MonoBehaviour
 	public float maxSpeed;
 	public float rotateSpeed;
 	private Vector3 target;
+	public GameObject targetObject;
 	public float satRadius;
 	public float timeToTarget;
 	private Vector3 direction;
@@ -16,7 +17,11 @@ public class KinematicArrive : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		target = Vector3.zero;
+		if (targetObject != null) {
+			setTarget(targetObject.transform.position);
+		} else {
+			target = Vector3.zero;
+		}
 	}
 
 	/// <summary>
@@ -27,7 +32,7 @@ public class KinematicArrive : MonoBehaviour
 	public void teleportToPoint (Vector3 t)
 	{
 
-		target = new Vector3 (t.x, t.y, -1.0f); //sets the correct z position of the target
+		target = new Vector3 (t.x, t.y, 0.0f); //sets the correct z position of the target
 
 		character.transform.position = target;
 		print (target);
@@ -39,7 +44,7 @@ public class KinematicArrive : MonoBehaviour
 	/// <param name="t">T.</param> 
 	public void setTarget (Vector3 t)
 	{
-		target = new Vector3 (t.x, t.y, -1.0f); //sets the correct z position of the target
+		target = new Vector3 (t.x, t.y, 0.0f); //sets the correct z position of the target
 		updateDir ();
 
 	}
@@ -88,6 +93,9 @@ public class KinematicArrive : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+
+		if (targetObject != null) 
+			setTarget(targetObject.transform.position);
 
 		if (!checkRadius ()) {
 			updateDir ();
