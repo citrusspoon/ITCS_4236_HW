@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 39959052}
   m_Layer: 0
   m_Name: Back
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 62949176}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 405426448}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1222,6 +1222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1300588213}
+  obstaclePrefab: {fileID: 1817437903519976, guid: 7631f0a327d262f4d865ff9d70532b2f,
+    type: 2}
 --- !u!1 &1300588213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1505,7 @@ GameObject:
   - component: {fileID: 1977871532}
   m_Layer: 0
   m_Name: Leader
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
