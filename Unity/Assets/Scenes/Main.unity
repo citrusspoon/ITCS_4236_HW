@@ -489,7 +489,7 @@ MonoBehaviour:
   maxSpeed: 5
   rotateSpeed: 4
   targetObject: {fileID: 67677048}
-  satRadius: 0.25
+  satRadius: 0.01
   timeToTarget: 0.5
 --- !u!23 &62949178
 MeshRenderer:
@@ -1479,7 +1479,7 @@ MonoBehaviour:
   maxSpeed: 5
   rotateSpeed: 4
   targetObject: {fileID: 1300588213}
-  satRadius: 0.1
+  satRadius: 0.01
   timeToTarget: 0.5
 --- !u!23 &1977871534
 MeshRenderer:
