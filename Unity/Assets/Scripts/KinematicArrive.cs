@@ -60,9 +60,10 @@ public class KinematicArrive : MonoBehaviour
 		//direction /= timeToTarget;
 
 	}
+		
 
 	/// <summary>
-	/// Rotates the character toward the target. Speed can be se in inspector.
+	/// Rotates the character toward the target. Speed can be set in inspector.
 	/// </summary>
 	private void rotate ()
 	{
@@ -100,11 +101,8 @@ public class KinematicArrive : MonoBehaviour
 		if (!checkRadius ()) {
 			updateDir ();
 			rotate ();
-
-
 			direction /= timeToTarget;
 			capSpeed ();
-
 			character.GetComponent<Rigidbody> ().velocity = direction;
 		} else { //stops the character after the radius of satisfaction has been crossed
 			character.GetComponent<Rigidbody> ().velocity = Vector3.zero;
