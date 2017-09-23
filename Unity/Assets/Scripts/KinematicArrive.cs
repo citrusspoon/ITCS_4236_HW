@@ -38,6 +38,7 @@ public class KinematicArrive : MonoBehaviour
 		print (target);
 	}
 
+
 	/// <summary>
 	/// Moves to point with rotation.
 	/// </summary>
