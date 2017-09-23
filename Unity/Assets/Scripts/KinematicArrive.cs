@@ -13,6 +13,7 @@ public class KinematicArrive : MonoBehaviour
 	public float satRadius;
 	public float timeToTarget;
 	private Vector3 direction;
+	public GameObject cone;
 
 	// Use this for initialization
 	void Start ()
@@ -95,6 +96,8 @@ public class KinematicArrive : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+
+		Debug.DrawRay (transform.position,  direction, Color.green);
 
 		if (targetObject != null) 
 			setTarget(targetObject.transform.position);
