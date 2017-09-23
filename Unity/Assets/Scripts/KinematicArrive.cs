@@ -96,8 +96,24 @@ public class KinematicArrive : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (gameObject.tag != "InvisibleLeader") {
 
-		Debug.DrawRay (transform.position,  direction, Color.green);
+			RaycastHit hit;
+			Ray sightRay = new Ray (transform.position, direction);
+
+			if (Physics.Raycast (sightRay, out hit, direction.magnitude)) {
+
+
+				if(hit.collider.tag == "Obstacle")
+					print ("Obstacle triggered");
+			}
+
+			Debug.DrawRay (transform.position, direction, Color.green);
+
+		}
+
+
+
 
 		if (targetObject != null) 
 			setTarget(targetObject.transform.position);
