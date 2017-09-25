@@ -96,19 +96,37 @@ public class KinematicArrive : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+
+
+
 		if (gameObject.tag != "InvisibleLeader") {
 
-			RaycastHit hit;
-			Ray sightRay = new Ray (transform.position, direction);
+			RaycastHit hitForward, hitLeft, hitRight;
+			Quaternion leftAngle = Quaternion.AngleAxis(-45, new Vector3(0, 0, 1));
+			Quaternion rightAngle = Quaternion.AngleAxis(45, new Vector3(0, 0, 1));
+			Ray forwardRay = new Ray (transform.position, direction);
+			Ray leftRay = new Ray (transform.position, leftAngle * direction );
+			Ray rightRay = new Ray (transform.position, rightAngle * direction);
+			/*
+			if (Physics.Raycast (forwardRay, out hitForward, direction.magnitude)) {
 
-			if (Physics.Raycast (sightRay, out hit, direction.magnitude)) {
-
-
-				if(hit.collider.tag == "Obstacle")
-					print ("Obstacle triggered");
+				if(hitForward.collider.tag == "Obstacle")
+					print ("Obstacle triggered forward");
 			}
+			if (Physics.Raycast (leftRay, out hitLeft, direction.magnitude)) {
+
+				if(hitLeft.collider.tag == "Obstacle")
+					print ("Obstacle triggered left");
+			}
+			if (Physics.Raycast (rightRay, out hitRight, direction.magnitude)) {
+
+				if(hitRight.collider.tag == "Obstacle")
+					print ("Obstacle triggered right");
+			}*/
 
 			Debug.DrawRay (transform.position, direction, Color.green);
+			Debug.DrawRay (transform.position, leftAngle * direction, Color.green);
+			Debug.DrawRay (transform.position, rightAngle * direction, Color.green);
 
 		}
 
