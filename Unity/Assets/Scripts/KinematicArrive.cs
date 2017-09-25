@@ -102,8 +102,8 @@ public class KinematicArrive : MonoBehaviour
 		if (gameObject.tag != "InvisibleLeader") {
 
 			RaycastHit hitForward, hitLeft, hitRight;
-			Quaternion rightAngle = Quaternion.AngleAxis(-45, new Vector3(0, 0, 1));
-			Quaternion leftAngle = Quaternion.AngleAxis(45, new Vector3(0, 0, 1));
+			Quaternion rightAngle = Quaternion.AngleAxis(-20, new Vector3(0, 0, 1));
+			Quaternion leftAngle = Quaternion.AngleAxis(20, new Vector3(0, 0, 1));
 			Ray forwardRay = new Ray (transform.position, direction);
 			Ray leftRay = new Ray (transform.position, leftAngle * direction );
 			Ray rightRay = new Ray (transform.position, rightAngle * direction);
