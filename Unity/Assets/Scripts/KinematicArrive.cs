@@ -14,6 +14,7 @@ public class KinematicArrive : MonoBehaviour
 	public float timeToTarget;
 	private Vector3 direction;
 	public GameObject cone;
+	private char triggeredDir;
 
 	// Use this for initialization
 	void Start ()
@@ -23,6 +24,9 @@ public class KinematicArrive : MonoBehaviour
 		} else {
 			target = Vector3.zero;
 		}
+		triggeredDir = 'n';
+
+
 	}
 
 	/// <summary>
@@ -56,10 +60,41 @@ public class KinematicArrive : MonoBehaviour
 	/// </summary>
 	private void updateDir ()
 	{
-		direction = target - character.transform.position; //gets Vector3 between character and target
-		float rotateZ = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg; //calculates the change in rotation necessary to face the target in degrees
+		Vector3 offset = target;
+
+		switch (triggeredDir) {
+
+		case 'l':
+			print ("Left case");
+			//offset = new Vector3 (5.0f, 0.0f, 0.0f);
+			break;
+		case 'r':
+			print ("Right case");
+			//offset = new Vector3 (-5.0f, 0.0f, 0.0f);
+			break;
+		case 'c':
+			print ("Center case");
+			//offset = new Vector3 (10.0f, 0.0f, 0.0f);
+			break;
+		default:
+			//print ("No case");
+			break;
+		}
+
+
+
+
+
+		direction = (offset  - character.transform.position); //gets Vector3 between character and target, adjusts it if there is an obstacle
+
+
+
+
+
+
+		/*float rotateZ = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg; //calculates the change in rotation necessary to face the target in degrees
 		character.transform.rotation = Quaternion.Lerp (character.transform.rotation, Quaternion.Euler (0.0f, 0.0f, rotateZ), Time.deltaTime * rotateSpeed); //smoothly rotates character to face target
-		//direction /= timeToTarget;
+		*/
 
 	}
 		
@@ -102,31 +137,42 @@ public class KinematicArrive : MonoBehaviour
 		if (gameObject.tag != "InvisibleLeader") {
 
 			RaycastHit hitForward, hitLeft, hitRight;
-			Quaternion rightAngle = Quaternion.AngleAxis(-20, new Vector3(0, 0, 1));
-			Quaternion leftAngle = Quaternion.AngleAxis(20, new Vector3(0, 0, 1));
+			Quaternion rightAngle = Quaternion.AngleAxis(-10, new Vector3(0, 0, 1));
+			Quaternion leftAngle = Quaternion.AngleAxis(10, new Vector3(0, 0, 1));
+			Ray forwardRay = new Ray (transform.position, direction);
+			Ray leftRay = new Ray (transform.position + new Vector3(-0.5f,0,0), direction );
+			Ray rightRay = new Ray (transform.position+ new Vector3(0.5f,0,0), rightAngle * direction);
+			/*
 			Ray forwardRay = new Ray (transform.position, direction);
 			Ray leftRay = new Ray (transform.position, leftAngle * direction );
 			Ray rightRay = new Ray (transform.position, rightAngle * direction);
+			*/
 
 			if (Physics.Raycast (forwardRay, out hitForward, direction.magnitude)) {
 
-				if(hitForward.collider.tag == "Obstacle")
-					print ("Obstacle triggered forward");
-			}
-			if (Physics.Raycast (leftRay, out hitLeft, direction.magnitude)) {
+				if (hitForward.collider.tag == "Obstacle") {
+					print ("Obstacle triggered center");
+					triggeredDir = 'c';
+				}
+			} else if (Physics.Raycast (leftRay, out hitLeft, direction.magnitude)) {
 
-				if(hitLeft.collider.tag == "Obstacle")
+				if (hitLeft.collider.tag == "Obstacle") {
 					print ("Obstacle triggered left");
-			}
-			if (Physics.Raycast (rightRay, out hitRight, direction.magnitude)) {
+					triggeredDir = 'l';
+				}
+			} else if (Physics.Raycast (rightRay, out hitRight, direction.magnitude)) {
 
-				if(hitRight.collider.tag == "Obstacle")
+				if (hitRight.collider.tag == "Obstacle") {
 					print ("Obstacle triggered right");
+					triggeredDir = 'r';
+				}
+			} else {
+				triggeredDir = 'n';
 			}
 
 			Debug.DrawRay (transform.position, direction, Color.green);
-			Debug.DrawRay (transform.position, leftAngle * direction, Color.green);
-			Debug.DrawRay (transform.position, rightAngle * direction, Color.green);
+			Debug.DrawRay (transform.position + new Vector3(-0.5f,0,0),  direction, Color.green);
+			Debug.DrawRay (transform.position+ new Vector3(0.5f,0,0),  direction, Color.green);
 
 		}
 
