@@ -60,37 +60,7 @@ public class KinematicArrive : MonoBehaviour
 	/// </summary>
 	private void updateDir ()
 	{
-		Vector3 offset = target;
-
-		switch (triggeredDir) {
-
-		case 'l':
-			print ("Left case");
-			//offset = new Vector3 (5.0f, 0.0f, 0.0f);
-			break;
-		case 'r':
-			print ("Right case");
-			//offset = new Vector3 (-5.0f, 0.0f, 0.0f);
-			break;
-		case 'c':
-			print ("Center case");
-			//offset = new Vector3 (10.0f, 0.0f, 0.0f);
-			break;
-		default:
-			//print ("No case");
-			break;
-		}
-
-
-
-
-
-		direction = (offset  - character.transform.position); //gets Vector3 between character and target, adjusts it if there is an obstacle
-
-
-
-
-
+		direction = (target - character.transform.position); //gets Vector3 between character and target, adjusts it if there is an obstacle
 
 		/*float rotateZ = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg; //calculates the change in rotation necessary to face the target in degrees
 		character.transform.rotation = Quaternion.Lerp (character.transform.rotation, Quaternion.Euler (0.0f, 0.0f, rotateZ), Time.deltaTime * rotateSpeed); //smoothly rotates character to face target
@@ -132,7 +102,7 @@ public class KinematicArrive : MonoBehaviour
 	void Update ()
 	{
 
-
+		Vector3 offset = Vector3.zero;
 
 		if (gameObject.tag != "InvisibleLeader") {
 
@@ -140,8 +110,8 @@ public class KinematicArrive : MonoBehaviour
 			Quaternion rightAngle = Quaternion.AngleAxis(-10, new Vector3(0, 0, 1));
 			Quaternion leftAngle = Quaternion.AngleAxis(10, new Vector3(0, 0, 1));
 			Ray forwardRay = new Ray (transform.position, direction);
-			Ray leftRay = new Ray (transform.position + new Vector3(-0.5f,0,0), direction );
-			Ray rightRay = new Ray (transform.position+ new Vector3(0.5f,0,0), rightAngle * direction);
+			Ray leftRay = new Ray (transform.position + new Vector3(-0.6f,0,0), direction );
+			Ray rightRay = new Ray (transform.position+ new Vector3(0.6f,0,0), rightAngle * direction);
 			/*
 			Ray forwardRay = new Ray (transform.position, direction);
 			Ray leftRay = new Ray (transform.position, leftAngle * direction );
@@ -153,26 +123,30 @@ public class KinematicArrive : MonoBehaviour
 				if (hitForward.collider.tag == "Obstacle") {
 					print ("Obstacle triggered center");
 					triggeredDir = 'c';
+					offset = new Vector3 (4,0,0);
 				}
 			} else if (Physics.Raycast (leftRay, out hitLeft, direction.magnitude)) {
 
 				if (hitLeft.collider.tag == "Obstacle") {
 					print ("Obstacle triggered left");
 					triggeredDir = 'l';
+					offset = new Vector3 (1,0,0);
 				}
 			} else if (Physics.Raycast (rightRay, out hitRight, direction.magnitude)) {
 
 				if (hitRight.collider.tag == "Obstacle") {
 					print ("Obstacle triggered right");
 					triggeredDir = 'r';
+					offset = new Vector3 (-1,0,0);
 				}
 			} else {
 				triggeredDir = 'n';
+				offset = Vector3.zero;
 			}
 
 			Debug.DrawRay (transform.position, direction, Color.green);
-			Debug.DrawRay (transform.position + new Vector3(-0.5f,0,0),  direction, Color.green);
-			Debug.DrawRay (transform.position+ new Vector3(0.5f,0,0),  direction, Color.green);
+			Debug.DrawRay (transform.position + new Vector3(-0.6f,0,0),  direction, Color.green);
+			Debug.DrawRay (transform.position+ new Vector3(0.6f,0,0),  direction, Color.green);
 
 		}
 
@@ -187,7 +161,7 @@ public class KinematicArrive : MonoBehaviour
 			rotate ();
 			direction /= timeToTarget;
 			capSpeed ();
-			character.GetComponent<Rigidbody> ().velocity = direction;
+			character.GetComponent<Rigidbody> ().velocity = direction + offset;
 		} else { //stops the character after the radius of satisfaction has been crossed
 			character.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		}
