@@ -101,22 +101,20 @@ public class KinematicArrive : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
+		//amount to adjust velocity by based on obstacle detection
 		Vector3 offset = Vector3.zero;
 
 		if (gameObject.tag != "InvisibleLeader") {
 
 			RaycastHit hitForward, hitLeft, hitRight;
+			//angles for the left and right sides of the raycast triangle
 			Quaternion rightAngle = Quaternion.AngleAxis(-10, new Vector3(0, 0, 1));
 			Quaternion leftAngle = Quaternion.AngleAxis(10, new Vector3(0, 0, 1));
-			Ray forwardRay = new Ray (transform.position, direction);
-			Ray leftRay = new Ray (transform.position + new Vector3(-0.6f,0,0), direction );
-			Ray rightRay = new Ray (transform.position+ new Vector3(0.6f,0,0), rightAngle * direction);
-			/*
+
 			Ray forwardRay = new Ray (transform.position, direction);
 			Ray leftRay = new Ray (transform.position, leftAngle * direction );
 			Ray rightRay = new Ray (transform.position, rightAngle * direction);
-			*/
+
 
 			if (Physics.Raycast (forwardRay, out hitForward, direction.magnitude)) {
 
@@ -130,23 +128,24 @@ public class KinematicArrive : MonoBehaviour
 				if (hitLeft.collider.tag == "Obstacle") {
 					print ("Obstacle triggered left");
 					triggeredDir = 'l';
-					offset = new Vector3 (1,0,0);
+					offset = new Vector3 (2,0,0);
 				}
 			} else if (Physics.Raycast (rightRay, out hitRight, direction.magnitude)) {
 
 				if (hitRight.collider.tag == "Obstacle") {
 					print ("Obstacle triggered right");
 					triggeredDir = 'r';
-					offset = new Vector3 (-1,0,0);
+					offset = new Vector3 (-2,0,0);
 				}
 			} else {
 				triggeredDir = 'n';
 				offset = Vector3.zero;
 			}
 
+			//draws the raycasts for visualization
 			Debug.DrawRay (transform.position, direction, Color.green);
-			Debug.DrawRay (transform.position + new Vector3(-0.6f,0,0),  direction, Color.green);
-			Debug.DrawRay (transform.position+ new Vector3(0.6f,0,0),  direction, Color.green);
+			Debug.DrawRay (transform.position ,  leftAngle*direction , Color.green);
+			Debug.DrawRay (transform.position,  rightAngle*direction, Color.green);
 
 		}
 

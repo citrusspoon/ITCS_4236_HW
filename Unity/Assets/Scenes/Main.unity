@@ -255,7 +255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &39959052
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -283,7 +283,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 39959051}
-  sensor: {fileID: 0}
   maxSpeed: 5
   rotateSpeed: 4
   targetObject: {fileID: 1327755432}
@@ -460,7 +459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &62949176
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -488,7 +487,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 62949175}
-  sensor: {fileID: 0}
   maxSpeed: 5
   rotateSpeed: 4
   targetObject: {fileID: 67677048}
@@ -633,7 +631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &218023234
 Transform:
   m_ObjectHideFlags: 0
@@ -786,7 +784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &405426448
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -814,7 +812,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 405426447}
-  sensor: {fileID: 0}
   maxSpeed: 5
   rotateSpeed: 4
   targetObject: {fileID: 79992700}
@@ -1032,7 +1029,7 @@ Camera:
   far clip plane: 16.2
   field of view: 60
   orthographic: 1
-  orthographic size: 9.13
+  orthographic size: 23.53
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1291,7 +1288,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1300588213}
-  sensor: {fileID: 0}
   maxSpeed: 5
   rotateSpeed: 4
   targetObject: {fileID: 0}
@@ -1343,7 +1339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1529810287
 Transform:
   m_ObjectHideFlags: 0
@@ -1545,7 +1541,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1977871531}
-  sensor: {fileID: 0}
   maxSpeed: 5
   rotateSpeed: 4
   targetObject: {fileID: 1300588213}
