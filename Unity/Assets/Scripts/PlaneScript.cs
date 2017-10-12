@@ -33,6 +33,7 @@ public class PlaneScript : MonoBehaviour
 		Vector3 clickPoint = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
 		obstacleClone = Instantiate (obstaclePrefab, new Vector3(clickPoint.x, clickPoint.y, 0.0f) , Quaternion.identity) as GameObject;
 	}
+		
 	
 	// Update is called once per frame
 	void Update ()
