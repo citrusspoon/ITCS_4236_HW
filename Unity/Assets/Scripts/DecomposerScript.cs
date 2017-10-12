@@ -12,8 +12,10 @@ public class DecomposerScript : MonoBehaviour {
 
 	void decompose(){
 
+		for(int i = 0; i < planeLength; i++)
+			for(int j = 0; j < planeHeight; j++)
+				Debug.DrawLine (new Vector3(i + 0.5f,j+0.5f,-2), new Vector3(i + 0.5f,j+0.5f,1), Color.green);
 
-		Debug.DrawLine (new Vector3(0,0,-2), new Vector3(0,0,1), Color.green);
 
 		
 

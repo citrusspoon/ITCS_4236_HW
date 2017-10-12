@@ -1534,8 +1534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560f2d6079075a24eb29769733bb859d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planeLength: 0
-  planeHeight: 0
+  planeLength: 50
+  planeHeight: 50
 --- !u!1 &1977871531
 GameObject:
   m_ObjectHideFlags: 0
