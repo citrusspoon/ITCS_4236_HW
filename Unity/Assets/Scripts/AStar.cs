@@ -10,13 +10,21 @@ public class AStar : MonoBehaviour {
 	public GameObject decomposer;
 	public int planeLength;
 	public int planeHeight;
+	private bool pathing;
+	private List<Vector3> movementPath;
+	private int i;
+
+
 
 	// Use this for initialization
 	void Start () {
-		
+		pathing = false;
+		i = 0;
+		movementPath = new List<Vector3> ();
 	}
 
 	public void setTarget (Vector3 t){
+		print ("Setting target");
 		target = new Vector3 ((int)t.x, (int)t.y, 0); //sets the correct z position of the target
 		decomposer.GetComponent<DecomposerScript>().decompose();
 		goalNode = decomposer.GetComponent<DecomposerScript>().grid[(int)target.x, (int)target.y];
@@ -25,12 +33,13 @@ public class AStar : MonoBehaviour {
 	}
 
 	public void runAStar(){
-
+		print ("Start astar");
 		Node top, bottom, left, right;
 		List<Node> closedList = new List<Node>();
 		List<Node> path = new List<Node>();
 		Node currentNode;
 		List<Node> openList = new List<Node>();
+		movementPath.Clear ();
 		bool goalfound = false;
 
 
@@ -65,10 +74,12 @@ public class AStar : MonoBehaviour {
 
 				//reverse path here
 
-				print("Printing path list");
 				for (int i = path.Count - 1; i >= 0; i--) {
 					print(path[i].toString());
+					movementPath.Add (new Vector3(path[i].getRow(), path[i].getCol(),0));
 				}
+
+				pathing = true;
 
 
 			} else {
@@ -179,6 +190,12 @@ public class AStar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/*
+		if (movementPath.Count > 0)
+			GetComponent<Transform> ().position = Vector3.Lerp (GetComponent<Transform> ().position,movementPath [3], Time.deltaTime*2);
+
+*/
+
 		
 	}
 }
