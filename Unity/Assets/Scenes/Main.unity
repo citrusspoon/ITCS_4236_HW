@@ -1871,6 +1871,8 @@ MonoBehaviour:
   decomposer: {fileID: 1931191799}
   planeLength: 50
   planeHeight: 50
+  markerPrefab: {fileID: 1441816344367838, guid: 642f3a68743cca74aa978ab4cada6c89,
+    type: 2}
 --- !u!1 &1327755432
 GameObject:
   m_ObjectHideFlags: 0

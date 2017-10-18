@@ -77,7 +77,7 @@ public class Node {
 	}
 
 	public string toString(){
-		return "Node: " + row + "_" + col;
+		return "Node: " + row + "_" + col + "  " + pathable;
 	}
 
 

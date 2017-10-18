@@ -9,10 +9,12 @@ public class AStar : MonoBehaviour {
 	private Node startNode;
 	public GameObject decomposer;
 	public int planeLength;
+	private GameObject markerClone;
 	public int planeHeight;
 	private bool pathing;
 	private List<Vector3> movementPath;
 	private int i;
+	public GameObject markerPrefab;
 
 
 
@@ -27,6 +29,15 @@ public class AStar : MonoBehaviour {
 		print ("Setting target");
 		target = new Vector3 ((int)t.x, (int)t.y, 0); //sets the correct z position of the target
 		decomposer.GetComponent<DecomposerScript>().decompose();
+		print ("printing grid");
+		for (int i = 0; i < 50; i++)
+			for (int j = 0; j < 50; j++)
+				if(!decomposer.GetComponent<DecomposerScript>().grid[i,j].isPathable())
+					print (decomposer.GetComponent<DecomposerScript>().grid[i,j].toString());
+
+
+		
+
 		goalNode = decomposer.GetComponent<DecomposerScript>().grid[(int)target.x, (int)target.y];
 		startNode = decomposer.GetComponent<DecomposerScript>().grid[(int)transform.position.x, (int)transform.position.y];
 		runAStar ();
@@ -77,6 +88,7 @@ public class AStar : MonoBehaviour {
 				for (int i = path.Count - 1; i >= 0; i--) {
 					print(path[i].toString());
 					movementPath.Add (new Vector3(path[i].getRow(), path[i].getCol(),0));
+					markerClone = Instantiate (markerPrefab, new Vector3(path[i].getRow(),path[i].getCol() , 0.0f) , Quaternion.identity) as GameObject;
 				}
 
 				pathing = true;
