@@ -31,21 +31,39 @@ public class AStar : MonoBehaviour {
 		List<Node> openList = new List<Node>();
 		bool goalfound = false;
 
-		openList.Add (new Node(0,0,true));
-		openList [0].setF (3);
-		openList.Add (new Node(1,0,true));
-		openList [1].setF (2);
-		openList.Add (new Node(2,0,true));
-		openList [2].setF (1);
 
-		openList.Sort (delegate(Node x, Node y) {
+
+
+	}
+	/// <summary>
+	/// Returns the Node at the top of the heap, removes it, and re-sorts the heap.
+	/// </summary>
+	/// <param name="l">Heap object</param>
+	private Node poll(List<Node> l){
+		Node temp = l [0];
+		l.RemoveAt(0);
+		l.Sort (delegate(Node x, Node y) {
 			return x.getF().CompareTo(y.getF());
 		});
-
-		for (int i = 0; i < 3; i++)
-			print (openList[i].toString());
-
-
+		return temp;
+	}
+	/// <summary>
+	/// Returns the Node at the top of the heap, but does not remove it.
+	/// </summary>
+	/// <param name="l">Heap Object</param>
+	private Node peek(List<Node> l){
+		return l [0];
+	}
+	/// <summary>
+	/// Adds Node to heap, and sorts it.
+	/// </summary>
+	/// <param name="n">Node to add</param>
+	/// <param name="l">Heap object</param>
+	private void addToHeap(Node n, List<Node> l){
+		l.Add (n);
+		l.Sort (delegate(Node x, Node y) {
+			return x.getF().CompareTo(y.getF());
+		});
 	}
 	
 	// Update is called once per frame
