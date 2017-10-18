@@ -8,13 +8,14 @@ public class PlaneScript : MonoBehaviour
 	public GameObject character;
 	private GameObject obstacleClone;
 	public GameObject obstaclePrefab;
+	[HideInInspector]public List<GameObject> obstacleList;
 
 
 
 	// Use this for initialization
 	void Start ()
 	{
-
+		obstacleList = new List <GameObject>();
 	}
 	/// <summary>
 	/// Sets the target point for Kinematic Arrive
@@ -32,6 +33,7 @@ public class PlaneScript : MonoBehaviour
 	{
 		Vector3 clickPoint = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
 		obstacleClone = Instantiate (obstaclePrefab, new Vector3(clickPoint.x, clickPoint.y, 0.0f) , Quaternion.identity) as GameObject;
+		obstacleList.Add (obstacleClone);
 	}
 		
 	
