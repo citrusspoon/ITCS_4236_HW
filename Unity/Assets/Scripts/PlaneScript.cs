@@ -22,9 +22,15 @@ public class PlaneScript : MonoBehaviour
 	/// </summary>
 	void leftClick ()
 	{
+		/*
 		//sends mouse click position to the KinematicArrive script
 		character.GetComponent<KinematicArrive> ().setTarget (Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x,
 			Input.mousePosition.y, Camera.main.nearClipPlane)));
+		*/
+		//sends mouse click position to the AStar script
+		character.GetComponent<AStar> ().setTarget (Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x,
+			Input.mousePosition.y, Camera.main.nearClipPlane)));
+
 	}
 	/// <summary>
 	/// Creates an obstacle at clicked point.

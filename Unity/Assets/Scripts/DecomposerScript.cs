@@ -14,7 +14,7 @@ public class DecomposerScript : MonoBehaviour {
 		grid = new Node[50,50];
 		for (int i = 0; i < planeLength; i++)
 			for (int j = 0; j < planeHeight; j++)
-				grid [i, j] = new Node (true);
+				grid [i, j] = new Node (i,j,true);
 			
 	
 	}
@@ -29,9 +29,9 @@ public class DecomposerScript : MonoBehaviour {
 			}
 		}
 	}
-	*/
 
-	/*
+
+
 	void decompose(){
 
 		RaycastHit hit;
@@ -72,20 +72,17 @@ public class DecomposerScript : MonoBehaviour {
 
 	void decompose(){
 
-
 		for(int i = 0; i < plane.GetComponent<PlaneScript>().obstacleList.Count; i++){
 
 			int currentObstacleX = (int)plane.GetComponent<PlaneScript> ().obstacleList [i].transform.position.x;
 			int currentObstacleY =(int) plane.GetComponent<PlaneScript> ().obstacleList [i].transform.position.y;
-
-
+		
 			if (grid [currentObstacleX, currentObstacleY].isPathable ())
 				grid [currentObstacleX, currentObstacleY].setPathable (false);
 
+
 		}
-
 		print ("Decompose finished");
-
 	}
 		
 
