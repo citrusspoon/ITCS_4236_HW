@@ -21,9 +21,13 @@ public class Node {
 
 
 
+
 	//mutator methods to set values
 	public void setF(){
 		f = g + h;
+	}
+	public void setF(int x){
+		f = x;
 	}
 	public void setG(int value){
 		g = value;
