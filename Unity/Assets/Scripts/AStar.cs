@@ -8,6 +8,8 @@ public class AStar : MonoBehaviour {
 	private Node goalNode;
 	private Node startNode;
 	public GameObject decomposer;
+	public int planeLength;
+	public int planeHeight;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +33,105 @@ public class AStar : MonoBehaviour {
 		List<Node> openList = new List<Node>();
 		bool goalfound = false;
 
+
+		// calculate F,G,H, parent is null of start node
+		startNode.setParent(null);
+		startNode.setG(calcG(startNode));
+		startNode.setH(calcH(startNode));
+		startNode.setF();
+
+		// add start node to open list
+		addToHeap(startNode, openList);
+
+		print ("Start: " + startNode.toString());
+		print ("Goal: " + goalNode.toString());
+		// loop while goal is not found or openlist is not empty
+
+		while (!goalfound && openList.Count > 0) {
+			// pop off node with lowest F from open list
+			currentNode = poll(openList);
+
+			// check if it's the goal node, if yes generate path
+			if (currentNode.equals (goalNode)) {
+				goalfound = true;
+				// generate path
+				while (currentNode.getParent () != null) {
+					path.Add (currentNode);
+					currentNode = currentNode.getParent ();
+				}
+
+				//add start node to path
+				path.Add (startNode);
+
+				//reverse path here
+
+				print("Printing path list");
+				for (int i = path.Count - 1; i >= 0; i--) {
+					print(path[i].toString());
+				}
+
+
+			} else {
+				//generate neighbors
+
+
+				// -------------Top--------------//
+
+				if (currentNode.getRow() - 1 > 0) {
+					top = decomposer.GetComponent<DecomposerScript>().grid[currentNode.getRow() - 1,currentNode.getCol()];
+					if (top.isPathable() && !closedList.Contains(top)) {
+						top.setG(calcG(top));
+						top.setH(calcH(top));
+						top.setF();
+						top.setParent(currentNode);
+						addToHeap(top, openList);
+					}
+				}
+				// -------------Bottom--------------//
+				if (currentNode.getRow() + 1 < planeHeight - 1) {
+					bottom = decomposer.GetComponent<DecomposerScript>().grid[currentNode.getRow() + 1,currentNode.getCol()];
+					if (bottom.isPathable() && !closedList.Contains(bottom)) {
+						bottom.setG(calcG(bottom));
+						bottom.setH(calcH(bottom));
+						bottom.setF();
+						bottom.setParent(currentNode);
+						addToHeap(bottom, openList);
+					}
+				}
+				// -------------Left--------------//
+				if (currentNode.getCol() - 1 > 0) {
+					left = decomposer.GetComponent<DecomposerScript>().grid[currentNode.getRow(),currentNode.getCol() - 1];
+					if (left.isPathable() && !closedList.Contains(left)) {
+						left.setG(calcG(left));
+						left.setH(calcH(left));
+						left.setF();
+						left.setParent(currentNode);
+						addToHeap(left, openList);
+					}
+				}
+				// -------------Right--------------//
+				if (currentNode.getCol() + 1 < planeLength - 1) {
+					right = decomposer.GetComponent<DecomposerScript>().grid[currentNode.getRow(),currentNode.getCol() + 1];
+					if (right.isPathable() && !closedList.Contains(right)) {
+						right.setG(calcG(right));
+						right.setH(calcH(right));
+						right.setF();
+						right.setParent(currentNode);
+						addToHeap(right, openList);
+					}
+				}
+
+				// add current node to closed list
+				closedList.Add(currentNode);
+
+
+
+			}
+		}
+
+		if(!goalfound) {
+			print("No path found.");
+		}
 
 
 
@@ -64,6 +165,16 @@ public class AStar : MonoBehaviour {
 		l.Sort (delegate(Node x, Node y) {
 			return x.getF().CompareTo(y.getF());
 		});
+	}
+
+	private int calcH(Node n) {
+
+		return Mathf.Abs(n.getCol() - goalNode.getCol()) + Mathf.Abs(n.getRow() - goalNode.getRow());
+	}
+
+	private int calcG(Node n) {
+
+		return Mathf.Abs(n.getCol() - startNode.getCol()) + Mathf.Abs(n.getRow() - startNode.getRow());
 	}
 	
 	// Update is called once per frame
