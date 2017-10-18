@@ -30,6 +30,7 @@ public class PlaneScript : MonoBehaviour
 		//sends mouse click position to the AStar script
 		character.GetComponent<AStar> ().setTarget (Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x,
 			Input.mousePosition.y, Camera.main.nearClipPlane)));
+		
 
 	}
 	/// <summary>

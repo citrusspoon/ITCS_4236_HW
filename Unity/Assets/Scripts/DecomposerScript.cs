@@ -70,7 +70,7 @@ public class DecomposerScript : MonoBehaviour {
 		}
 	}
 
-	void decompose(){
+	public void decompose(){
 
 		for(int i = 0; i < plane.GetComponent<PlaneScript>().obstacleList.Count; i++){
 
@@ -89,9 +89,6 @@ public class DecomposerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		if(Input.GetKeyDown(KeyCode.Space))
-			decompose ();
 
 		if(Input.GetKey(KeyCode.LeftControl))
 			drawLines ();
