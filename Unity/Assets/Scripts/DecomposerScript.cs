@@ -63,9 +63,9 @@ public class DecomposerScript : MonoBehaviour {
 		for (int i = 0; i < planeLength; i++) {
 			for (int j = 0; j < planeHeight; j++) {
 				if(grid[i,j].isPathable())
-					Debug.DrawLine (new Vector3 (i + 0.5f, j + 0.5f, -2), new Vector3 (i + 0.5f, j + 0.5f, 1), Color.green);
+					Debug.DrawLine (new Vector3 (i , j , -2), new Vector3 (i , j , 1), Color.green);
 				else
-					Debug.DrawLine (new Vector3 (i + 0.5f, j + 0.5f, -2), new Vector3 (i + 0.5f, j + 0.5f, 1), Color.blue);
+					Debug.DrawLine (new Vector3 (i , j , -2), new Vector3 (i , j , 1), Color.blue);
 			}
 		}
 	}
