@@ -15,4 +15,8 @@ public class Node {
 		return pathable;
 	}
 
+	public void setPathable(bool b){
+		pathable = b;
+	}
+
 }

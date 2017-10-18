@@ -12,6 +12,10 @@ public class DecomposerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		grid = new Node[50,50];
+		for (int i = 0; i < planeLength; i++)
+			for (int j = 0; j < planeHeight; j++)
+				grid [i, j] = new Node (true);
+			
 	
 	}
 	/*
@@ -74,11 +78,13 @@ public class DecomposerScript : MonoBehaviour {
 			int currentObstacleX = (int)plane.GetComponent<PlaneScript> ().obstacleList [i].transform.position.x;
 			int currentObstacleY =(int) plane.GetComponent<PlaneScript> ().obstacleList [i].transform.position.y;
 
-			print (currentObstacleX + "," + currentObstacleY);
+
+			if (grid [currentObstacleX, currentObstacleY].isPathable ())
+				grid [currentObstacleX, currentObstacleY].setPathable (false);
 
 		}
 
-
+		print ("Decompose finished");
 
 	}
 		
