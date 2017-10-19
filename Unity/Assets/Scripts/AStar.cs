@@ -13,15 +13,17 @@ public class AStar : MonoBehaviour {
 	public int planeHeight;
 	private bool pathing;
 	private List<Vector3> movementPath;
-	private int i;
 	public GameObject markerPrefab;
+	private int movementIndex;
+	private float lerpVar;
 
 
 
 	// Use this for initialization
 	void Start () {
 		pathing = false;
-		i = 0;
+		movementIndex = 1;
+		lerpVar = 0f;
 		movementPath = new List<Vector3> ();
 	}
 
@@ -202,11 +204,22 @@ public class AStar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*
-		if (movementPath.Count > 0)
-			GetComponent<Transform> ().position = Vector3.Lerp (GetComponent<Transform> ().position,movementPath [3], Time.deltaTime*2);
 
-*/
+		if (movementIndex < movementPath.Count) {
+			GetComponent<Transform> ().position = Vector3.Lerp (GetComponent<Transform> ().position, movementPath [movementIndex], lerpVar);
+			lerpVar += 6f / 50f;
+
+			if (lerpVar >= 1f) {
+				lerpVar = 0f;
+				movementIndex++;
+			}
+		}
+
+		if (movementIndex == movementPath.Count) {
+			movementPath.Clear ();
+			movementIndex = 1;
+		}
+
 
 		
 	}
