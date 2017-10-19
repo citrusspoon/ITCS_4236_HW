@@ -16,6 +16,7 @@ public class AStar : MonoBehaviour {
 	public GameObject markerPrefab;
 	private int movementIndex;
 	private float lerpVar;
+	private float rotation;
 
 
 
@@ -24,6 +25,7 @@ public class AStar : MonoBehaviour {
 		pathing = false;
 		movementIndex = 1;
 		lerpVar = 0f;
+		rotation = 0f;
 		movementPath = new List<Vector3> ();
 	}
 
@@ -209,18 +211,40 @@ public class AStar : MonoBehaviour {
 			GetComponent<Transform> ().position = Vector3.Lerp (GetComponent<Transform> ().position, movementPath [movementIndex], lerpVar);
 			lerpVar += 6f / 50f;
 
+
+
+
 			if (lerpVar >= 1f) {
 				lerpVar = 0f;
+				rotate ();
+
 				movementIndex++;
+
 			}
 		}
 
 		if (movementIndex == movementPath.Count) {
 			movementPath.Clear ();
 			movementIndex = 1;
+
 		}
+
 
 
 		
 	}
+	public void rotate(){
+		
+		if(movementPath [movementIndex-1].y < movementPath [movementIndex].y)
+			transform.eulerAngles = new Vector3(0f,0f,90f);
+		else if(movementPath [movementIndex-1].y > movementPath [movementIndex].y)
+			transform.eulerAngles = new Vector3(0f,0f,270f);
+		else if(movementPath [movementIndex-1].x > movementPath [movementIndex].x)
+			transform.eulerAngles = new Vector3(0f,0f,180f);
+		else if(movementPath [movementIndex-1].x > movementPath [movementIndex].x)
+			transform.eulerAngles = new Vector3(0f,0f,0f);
+
+	}
+
+
 }
