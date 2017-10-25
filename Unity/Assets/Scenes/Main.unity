@@ -1533,7 +1533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &937035683
 Transform:
   m_ObjectHideFlags: 0
@@ -1873,6 +1873,7 @@ MonoBehaviour:
   planeHeight: 50
   markerPrefab: {fileID: 1441816344367838, guid: 642f3a68743cca74aa978ab4cada6c89,
     type: 2}
+  drawPath: 0
 --- !u!1 &1327755432
 GameObject:
   m_ObjectHideFlags: 0

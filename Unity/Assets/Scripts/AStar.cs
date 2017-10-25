@@ -17,6 +17,7 @@ public class AStar : MonoBehaviour {
 	private int movementIndex;
 	private float lerpVar;
 	private float rotation;
+	public bool drawPath;
 
 
 
@@ -92,7 +93,8 @@ public class AStar : MonoBehaviour {
 				for (int i = path.Count - 1; i >= 0; i--) {
 					print(path[i].toString());
 					movementPath.Add (new Vector3(path[i].getRow(), path[i].getCol(),0));
-					markerClone = Instantiate (markerPrefab, new Vector3(path[i].getRow(),path[i].getCol() , 0.0f) , Quaternion.identity) as GameObject;
+					if(drawPath)
+						markerClone = Instantiate (markerPrefab, new Vector3(path[i].getRow(),path[i].getCol() , 0.0f) , Quaternion.identity) as GameObject;
 				}
 
 				pathing = true;
